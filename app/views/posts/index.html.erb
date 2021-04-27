@@ -1,9 +1,9 @@
 <% @posts.each do |post| %>
-  <div class="my-5">
+  <div class="my-5 shadow rounded">
     <div class="card border-success">
       <h5 class="card-header bg-success text-white">
         <% if user_signed_in? %>
-          <%= post.user.email %>
+          <%= post.user.nick %>
         <% else %>
           <%= "Anonymous" %>
         <% end%>

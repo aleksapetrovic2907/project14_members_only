@@ -12,7 +12,12 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = current_user.posts.build
+    if user_signed_in?
+      @post = current_user.posts.build
+    else
+      flash[:alert] = "You must be logged in."
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /posts/1/edit
@@ -22,6 +27,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.build(post_params)
+    
 
     respond_to do |format|
       if @post.save
