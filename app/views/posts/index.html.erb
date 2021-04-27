@@ -9,15 +9,17 @@
             <%= "Anonymous" %>
           <% end%>
         </h5>
-        <% if post.user.id == current_user.id %>
-          <div class="float-end text">
-            <%= link_to edit_post_path(post) do %>
-              <i class="material-icons text-white">&#xe150;</i>
-            <% end %>
-            <%= link_to post, :method => :delete do %>
-              <i class="material-icons text-white">&#xe14c;</i>
-            <% end %>
-          </div>
+        <% if user_signed_in? %>
+          <% if post.user.id == current_user.id %>
+            <div class="float-end text">
+              <%= link_to edit_post_path(post) do %>
+                <i class="material-icons text-white">&#xe150;</i>
+              <% end %>
+              <%= link_to post, :method => :delete do %>
+                <i class="material-icons text-white">&#xe14c;</i>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
       <div class="card-body">
