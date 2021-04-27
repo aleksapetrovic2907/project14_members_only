@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!, except: %i[ index show ]
+  
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -12,12 +13,12 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    if user_signed_in?
+    # if user_signed_in?
       @post = current_user.posts.build
-    else
-      flash[:alert] = "You must be logged in."
-      redirect_to new_user_session_path
-    end
+    # else
+    #   flash[:alert] = "You must be logged in."
+    #   redirect_to new_user_session_path
+    # end
   end
 
   # GET /posts/1/edit
