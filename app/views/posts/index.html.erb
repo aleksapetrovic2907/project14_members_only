@@ -1,29 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<% @posts.each do |post| %>
+  <div class="my-5">
+    <div class="card border-success">
+      <h5 class="card-header bg-success text-white">
+        <% if user_signed_in? %>
+          <%= post.user.email %>
+        <% else %>
+          <%= "Anonymous" %>
+        <% end%>
+      </h5>
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <p class="card-text"><%= post.body %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
 <%= link_to 'New Post', new_post_path %>
